@@ -31,7 +31,7 @@ def pregunta_01():
                 suma+=int(num[1])
 
             return suma
-print(pregunta_01())
+#print(pregunta_01())
    
 
 
@@ -67,7 +67,7 @@ def pregunta_02():
         dict[letras] = dict[letras]+1
    
     return sorted(dict.items())
-print(pregunta_02())
+#print(pregunta_02())
  
 
 
