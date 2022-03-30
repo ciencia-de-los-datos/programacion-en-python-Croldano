@@ -21,8 +21,8 @@ def pregunta_01():
     214
 
     """
-        import csv
-        with open("data.csv",newline='') as f:
+    import csv
+    with open("data.csv",newline='') as f:
             datos = csv.reader(f, delimiter='\t')
             colums = list(datos)
         
