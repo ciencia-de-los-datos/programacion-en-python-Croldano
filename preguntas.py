@@ -50,7 +50,25 @@ def pregunta_02():
     ]
 
     """
-    return
+    
+    import csv
+    datos= open('data.csv')
+    leercsv= csv.reader(datos)
+    lista01=[] #con esta almaceno los datos de la columna 1 del 
+    lista02=[] #aquí vamos a meter todas las letras que necesitamos
+    dict={} #con el diccionario almacenaremos tanto letras como las cantidades.
+    for columna in leercsv: # por cada columna dentro del doc
+        lista01.append(columna[0])  # ingrese los datos de la columna 1 a lista01
+    for values in lista01:  # por cada dato en la lista 1
+        sublista = values.split()[0]  # esta variable almacena la letra que necesitamos
+        lista02.append(sublista)  #  los ingresa a la lista
+    for letras in lista02:
+        dict.setdefault(letras, 0)
+        dict[letras] = dict[letras]+1
+   
+    return sorted(dict.items())
+print(pregunta_02())
+ 
 
 
 def pregunta_03():
