@@ -86,7 +86,7 @@ def pregunta_03():
     ]
 
     """
-     #Lo primero es abrir el archivo
+      #Lo primero es abrir el archivo
   with open("data.csv", "r") as file:
     datac= file.readlines()
   
@@ -106,16 +106,16 @@ def pregunta_03():
   tuplac=[]
 
   for b in id:
-    for a in columnas:
+      for a in columnas:
       if a[0]== b:
         contador+= a[1]
       
     tuplac.append((b,contador)) 
     contador=0 
 
-  #print(tuplac)
+  
+    return tupla
 
-    return tuplac
 
 
 def pregunta_04():
