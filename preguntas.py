@@ -86,39 +86,40 @@ def pregunta_03():
     ]
 
     """
-      #Lo primero es abrir el archivo
-  with open("data.csv", "r") as file:
-    datac= file.readlines()
   
-  #Ahora para cada f que tenga \n en datac debo reemplazarla por un ""
-  #Luego hago split en cada \t en el datac
+    #Lo primero es abrir el archivo
+    with open("data.csv", "r") as file:
+      datac= file.readlines()
+    
+    #Ahora para cada f que tenga \n en datac debo reemplazarla por un ""
+    #Luego hago split en cada \t en el datac
 
-  datac= [a.replace("\n","") for a in datac]  
-  datac=[a.split("\t") for a in datac]
+    datac= [a.replace("\n","") for a in datac]  
+    datac=[a.split("\t") for a in datac]
 
-  #para cada a en la columna 0 y cada a en la columna 1 que encuentre en el datac
-  columnas= [[a[0],int(a[1])] for a in datac ]
+    #para cada a en la columna 0 y cada a en la columna 1 que encuentre en el datac
+    columnas= [[a[0],int(a[1])] for a in datac ]
 
-  #set convierte en diccionario y quita duplicado
-  id=sorted(set([a[0] for a in datac]))
+    #set convierte en diccionario y quita duplicado
+    id=sorted(set([a[0] for a in datac]))
 
-  contador=0 #usaré contador en dos partes para que este vuelva a cero en vez de acumular el valor de la columna1
-  tuplac=[]
+    contador=0 #usaré contador en dos partes para que este vuelva a cero en vez de acumular el valor de la columna1
+    tuplac=[]
 
-  for b in id:
+    for b in id:
       for a in columnas:
-      if a[0]== b:
-        contador+= a[1]
-      
-    tuplac.append((b,contador)) 
-    contador=0 
+        if a[0]== b:
+          contador+= a[1]
+        
+      tuplac.append((b,contador)) 
+      contador=0 
+    return tuplac  
+print(tuplac)
+    #print(tuplac)
+    #está bueno 
 
   
-    return tupla
-
-
-
-def pregunta_04():
+  def pregunta_04():
     """
     La columna 3 contiene una fecha en formato `YYYY-MM-DD`. Retorne la cantidad de
     registros por cada mes, tal como se muestra a continuación.
