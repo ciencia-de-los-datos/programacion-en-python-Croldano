@@ -455,8 +455,8 @@ def pregunta_11():
     datak=[f.split("\t") for f in datak]
 
     #divido las columnas 02 y 04 y saco los valores
-    columna01=[int(f[1]) for f in datak]
     columna04=[f[3].split(",")for f in datak]
+    columna01=[int(f[1]) for f in datak]
     
     #Creo una lista para unir la columna 04 con la columna 02
     lista=list(zip(columna04,columna01))
@@ -465,11 +465,11 @@ def pregunta_11():
     #para esto me valgo de un contador que hará que al pasar a cada letra el valor sea 0 de nuevo 
     #y no se acumule, adicionalmente, uso append para agregar b al elemento de la columna 02
 
-    lista=[]
+    lista2=[]
     contador=0
     for elemento in lista:
         for b in elemento[contador]:
-            lista.append((b,elemento[1]))
+            lista2.append((b,elemento[1]))
             contador+= 1
         contador=0
     
