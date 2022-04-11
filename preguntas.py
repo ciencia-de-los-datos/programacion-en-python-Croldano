@@ -104,7 +104,7 @@ def pregunta_03():
     id=sorted(set([a[0] for a in datac]))
 
     contador=0 #usaré contador en dos partes para que este vuelva a cero en vez de acumular el valor de la columna1
-    tuplac=[]
+    tuplac=[] #creo una lista vacía
 
     for b in id:
       for a in columnas:
@@ -169,7 +169,34 @@ def pregunta_05():
     ]
 
     """
-    return
+#como en los puntos anteriores, abro el archivo
+    with open("data.csv","r") as file:
+        datae=file.readlines()
+
+ #Estos pasos son sacados de los otros puntos, entonces es fácil, repetitivo
+ #para cada f que encuentre en datae, haga un split en el tabulador que encuentre   
+    datae=[f.split("\t") for f in datae]
+ #para cada f encontrado en datae, reemplace \n por "" (nada)   
+    datae=[f.replace("\n","")for f in datae]
+    
+    id_list=sorted(set([f[0] for f in datae]))
+    lista_datae=[(f[0],int(f[1])) for f in datae]
+ 
+  #creo dos listas vacías  
+    tuplae=[]
+    valores=[]
+    
+
+    for b in id_list:
+        for a in lista_datae:
+            if a[0]== b:
+                valores.append(a[1]) #si encuentra que a=b agrega uno en la lista
+
+        tuplae.append((b, max(valores),min(valores)))
+        valores.clear() #remueve todos los elementos de la lista
+
+    return tuplae
+    
 
 
 def pregunta_06():
@@ -194,7 +221,34 @@ def pregunta_06():
     ]
 
     """
-    return
+   
+    with open("data.csv","r") as file:
+        dataf=file.readlines()
+    dataf=[f.split("\t") for f in dataf]
+    dataf=[f.replace("\n","") for f in dataf]
+    dataf=[f[4].split(",") for f in dataf]
+    
+    #puedo reciclar pasos de los puntos anteriores hasta la línea 229 del código
+
+    #Hago una lista clave valor
+    Key_value_list= [(b[:3],int(b[4:]))for a in dataf for b in a]
+
+   #la lista va a retornar ordenada gracias a sorted y por medio de set retirará los elementos repetidos. 
+    keys_dict=sorted(set(elemento[0] for elemento in Key_value_list ))
+    
+    valores=[]
+    tuplaf=[]
+    
+    for key in keys_dict:
+        for elemento in Key_value_list:
+            if elemento[0]== key:
+                valores.append(elemento[1]) #lo que hace append es sumarme un elemento a la columna 1
+        tuplaf.append((key, min(valores),max(valores)))
+        valores.clear()
+    return tuplaf
+
+
+    
 
 
 def pregunta_07():
