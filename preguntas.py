@@ -388,9 +388,9 @@ def pregunta_09():
     
     #Creo una tupla y cuento las veces que encuentro cada key
     tuplah=[(a,key_list.count(a))for a in key_dict]
-    dict=dict(tuplah)
+    dict01=dict(tuplah)
            
-    return dict
+    return dict01
     
   
 
@@ -476,11 +476,11 @@ def pregunta_11():
     #Procedo a crear un diccionario
     diccionario={}
 
-    for key,value in lista:
-        if key in diccionario.keys():
-            diccionario[key]+=value
+    for keys,values in lista:
+        if keys in diccionario.keys():
+            diccionario[keys]+=values
         else:
-            diccionario[key] =value
+            diccionario[keys] =values
 
     #Ordeno el diccionario tomando como referente las letras de manera ascendente
 
