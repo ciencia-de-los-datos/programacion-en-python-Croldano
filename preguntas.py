@@ -27,11 +27,26 @@ def pregunta_01():
     214
 
     """
+<<<<<<< HEAD
     suma = 0
     for num in colums
     suma+= int(num[1])
     return suma
 print suma
+=======
+    import csv
+    with open("data.csv",newline='') as f:
+            datos = csv.reader(f, delimiter='\t')
+            colums = list(datos)
+        
+            suma=0
+            for num in colums:
+                suma+=int(num[1])
+
+            return suma
+#print(pregunta_01())
+   
+>>>>>>> d373329922b8c4f5fdf69074d7e8a103e00ad115
 
 
 def pregunta_02():
@@ -49,7 +64,25 @@ def pregunta_02():
     ]
 
     """
-    return
+    
+    import csv
+    datos= open('data.csv')
+    leercsv= csv.reader(datos)
+    lista01=[] #con esta almaceno los datos de la columna 1 del 
+    lista02=[] #aquí vamos a meter todas las letras que necesitamos
+    dict={} #con el diccionario almacenaremos tanto letras como las cantidades.
+    for columna in leercsv: # por cada columna dentro del doc
+        lista01.append(columna[0])  # ingrese los datos de la columna 1 a lista01
+    for values in lista01:  # por cada dato en la lista 1
+        sublista = values.split()[0]  # esta variable almacena la letra que necesitamos
+        lista02.append(sublista)  #  los ingresa a la lista
+    for letras in lista02:
+        dict.setdefault(letras, 0)
+        dict[letras] = dict[letras]+1
+   
+    return sorted(dict.items())
+#print(pregunta_02())
+ 
 
 
 def pregunta_03():
@@ -67,10 +100,40 @@ def pregunta_03():
     ]
 
     """
-    return
+  
+    #Lo primero es abrir el archivo
+    with open("data.csv", "r") as file:
+      datac= file.readlines()
+    
+    #Ahora para cada f que tenga \n en datac debo reemplazarla por un ""
+    #Luego hago split en cada \t en el datac
 
+    datac= [a.replace("\n","") for a in datac]  
+    datac=[a.split("\t") for a in datac]
 
-def pregunta_04():
+    #para cada a en la columna 0 y cada a en la columna 1 que encuentre en el datac
+    columnas= [[a[0],int(a[1])] for a in datac ]
+
+    #set convierte en diccionario y quita duplicado
+    id=sorted(set([a[0] for a in datac]))
+
+    contador=0 #usaré contador en dos partes para que este vuelva a cero en vez de acumular el valor de la columna1
+    tuplac=[]
+
+    for b in id:
+      for a in columnas:
+        if a[0]== b:
+          contador+= a[1]
+        
+      tuplac.append((b,contador)) 
+      contador=0 
+    return tuplac  
+print(tuplac)
+    #print(tuplac)
+    #está bueno 
+
+  
+  def pregunta_04():
     """
     La columna 3 contiene una fecha en formato `YYYY-MM-DD`. Retorne la cantidad de
     registros por cada mes, tal como se muestra a continuación.
