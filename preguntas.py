@@ -274,7 +274,33 @@ def pregunta_07():
     ]
 
     """
-    return
+    with open("data.csv","r") as file:
+        datag=file.readlines()
+    datag=[f.replace("\n","") for f in datag]
+    datag=[f.split("\t") for f in datag]
+    
+
+    #Debo crear una lista con elementos de la columna 1 y la columna 2
+    data_list=[(int(a[1]),a[0]) for a in datag]
+
+    #Debo extraer el conjunto de numeros unicos ordenados en la columna 2 de los datos y eliminar duplicados, para eso es set
+    numeros=sorted(set(a[0] for a in data_list))
+    
+    #Creo dos listas vacías
+    tuplag=[]
+    letters=[]
+    
+    #para cada numero extraigo la lista letras que aparecen en la lista de datag
+    for b in numeros:
+        for a in data_list:
+            if a[0]-b == 0:
+                letters.append(a[1])    
+
+        tuplag.append((b,letters))
+        letters=[]
+      
+    
+    return tuplag    
 
 
 def pregunta_08():
