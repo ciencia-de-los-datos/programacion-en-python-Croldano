@@ -510,4 +510,29 @@ def pregunta_12():
     }
 
     """
-    return
+    with open("data.csv", "r") as file:
+        datal=file.readlines()
+    datal=[f.replace("\n","")for f in datal]
+    datal=[f.split("\t") for f in datal]
+
+    #como en los puntos anteriores, obtengo valores de Columna01 y columna05 y los divido gracias 
+    #a split, y los uno con un zip
+    columna05=[f[4].split(",")for f in datal]
+    columna01=[(f[0]) for f in datal]
+    dataletras=list(zip(columna01,columna05))
+
+    #ordeno los valores de columna01 con sorted
+    dictkey=sorted(set(columna01))
+
+        #creo un diccionario con llaves ordenadas
+    diccionario={}
+    for key in dictkey:  
+        diccionario[key]= 0
+
+    #sumo los valores en el diccionario
+    for a, b in dataletras:
+       for c in b:
+           diccionario[a]+= int(c[4:])
+         
+    return diccionario
+    
