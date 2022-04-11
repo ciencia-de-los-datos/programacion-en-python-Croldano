@@ -12,12 +12,6 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 """
 
-import csv
-
-
-with open("data.csv", newline-'') as f:
-    datos= csv.reader(f,delimiter='\t')
-    colums=list(datos)
 
 def pregunta_01():
     """
@@ -27,13 +21,6 @@ def pregunta_01():
     214
 
     """
-<<<<<<< HEAD
-    suma = 0
-    for num in colums
-    suma+= int(num[1])
-    return suma
-print suma
-=======
     import csv
     with open("data.csv",newline='') as f:
             datos = csv.reader(f, delimiter='\t')
@@ -44,9 +31,8 @@ print suma
                 suma+=int(num[1])
 
             return suma
-#print(pregunta_01())
+
    
->>>>>>> d373329922b8c4f5fdf69074d7e8a103e00ad115
 
 
 def pregunta_02():
@@ -128,12 +114,10 @@ def pregunta_03():
       tuplac.append((b,contador)) 
       contador=0 
     return tuplac  
-print(tuplac)
-    #print(tuplac)
-    #está bueno 
+
 
   
-  def pregunta_04():
+def pregunta_04():
     """
     La columna 3 contiene una fecha en formato `YYYY-MM-DD`. Retorne la cantidad de
     registros por cada mes, tal como se muestra a continuación.
@@ -155,7 +139,19 @@ print(tuplac)
     ]
 
     """
-    return
+        #como en los puntos anteriores, abro el archivo
+    with open("data.csv","r") as file:
+        datad= file.readlines() #leo los datos 
+        datad= [f.replace("\n","") for f in datad] #reemplazo para cada f en el datad el \n por ""
+        datad= [f.split("\t") for f in datad] #hago split para cada f en datad que contenga \t
+    
+    lista_fechas=[f[2].split("-") for f in datad ] #para cada f en la columna dos de datad hacer split y usar ""
+    lista_meses=[f[1] for f in lista_fechas]
+    meses=sorted(set([f for f in lista_meses]))
+    tuplad=[(x, lista_meses.count(x)) for x in meses]
+
+    return tuplad
+   
 
 
 def pregunta_05():
