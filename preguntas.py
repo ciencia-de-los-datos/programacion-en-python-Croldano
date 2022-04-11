@@ -454,7 +454,6 @@ def pregunta_11():
         datak=file.readlines()
     datak=[f.replace("\n","")for f in datak]
     datak=[f.split("\t") for f in datak]
-
     #divido las columnas 02 y 04 y saco los valores
     columna04=[f[3].split(",")for f in datak]
     columna01=[int(f[1]) for f in datak]
@@ -465,7 +464,6 @@ def pregunta_11():
     #Creo una lista para asignarle a las letras el valor que corresponde en la columna 02
     #para esto me valgo de un contador que hará que al pasar a cada letra el valor sea 0 de nuevo 
     #y no se acumule, adicionalmente, uso append para agregar b al elemento de la columna 02
-
     lista2=[]
     contador=0
     for elemento in listak:
@@ -477,7 +475,7 @@ def pregunta_11():
     #Procedo a crear un diccionario
     diccionario={}
 
-    for key,value in listak:
+    for key,value in lista2:
         if key in diccionario.keys():
             diccionario[key]+=value
         else:
@@ -491,6 +489,9 @@ def pregunta_11():
         diccionario_ordenado[a]=diccionario[a]
 
     return diccionario_ordenado
+
+
+
    
 
 
