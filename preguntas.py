@@ -174,10 +174,11 @@ def pregunta_05():
         datae=file.readlines()
 
  #Estos pasos son sacados de los otros puntos, entonces es fácil, repetitivo
- #para cada f que encuentre en datae, haga un split en el tabulador que encuentre   
-    datae=[f.split("\t") for f in datae]
+
  #para cada f encontrado en datae, reemplace \n por "" (nada)   
     datae=[f.replace("\n","")for f in datae]
+ #para cada f que encuentre en datae, haga un split en el tabulador que encuentre   
+    datae=[f.split("\t") for f in datae]    
     
     id_list=sorted(set([f[0] for f in datae]))
     lista_datae=[(f[0],int(f[1])) for f in datae]
@@ -224,8 +225,8 @@ def pregunta_06():
    
     with open("data.csv","r") as file:
         dataf=file.readlines()
-    dataf=[f.split("\t") for f in dataf]
     dataf=[f.replace("\n","") for f in dataf]
+    dataf=[f.split("\t") for f in dataf]
     dataf=[f[4].split(",") for f in dataf]
     
     #puedo reciclar pasos de los puntos anteriores hasta la línea 229 del código
@@ -245,6 +246,7 @@ def pregunta_06():
                 valores.append(elemento[1]) #lo que hace append es sumarme un elemento a la columna 1
         tuplaf.append((key, min(valores),max(valores)))
         valores.clear()
+
     return tuplaf
 
 
