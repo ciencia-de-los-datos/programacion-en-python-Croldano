@@ -384,10 +384,11 @@ def pregunta_09():
     key_list= [(b[:3])for a in datah for b in a]
     
     #mediante el uso de set, elimino repetidos en key_list
-    key_dict=sorted(set( elem for elem in key_list ))
+    key_dict=sorted(set( elemento for elemento in key_list ))
     
     #Creo una tupla y cuento las veces que encuentro cada key
     tuplah=[(a,key_list.count(a))for a in key_dict]
+
     dict01=dict(tuplah)
            
     return dict01
@@ -459,7 +460,7 @@ def pregunta_11():
     columna01=[int(f[1]) for f in datak]
     
     #Creo una lista para unir la columna 04 con la columna 02
-    lista=list(zip(columna04,columna01))
+    listak=list(zip(columna04,columna01))
 
     #Creo una lista para asignarle a las letras el valor que corresponde en la columna 02
     #para esto me valgo de un contador que hará que al pasar a cada letra el valor sea 0 de nuevo 
@@ -467,7 +468,7 @@ def pregunta_11():
 
     lista2=[]
     contador=0
-    for elemento in lista:
+    for elemento in listak:
         for b in elemento[contador]:
             lista2.append((b,elemento[1]))
             contador+= 1
@@ -476,7 +477,7 @@ def pregunta_11():
     #Procedo a crear un diccionario
     diccionario={}
 
-    for keys,values in lista:
+    for keys,values in listak:
         if keys in diccionario.keys():
             diccionario[keys]+=values
         else:
