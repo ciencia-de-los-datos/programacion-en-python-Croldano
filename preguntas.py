@@ -21,7 +21,18 @@ def pregunta_01():
     214
 
     """
-    return
+    import csv
+    with open("data.csv",newline='') as f:
+            datos = csv.reader(f, delimiter='\t')
+            colums = list(datos)
+        
+            suma=0
+            for num in colums:
+                suma+=int(num[1])
+
+            return suma
+
+   
 
 
 def pregunta_02():
@@ -39,7 +50,25 @@ def pregunta_02():
     ]
 
     """
-    return
+    
+    import csv
+    datos= open('data.csv')
+    leercsv= csv.reader(datos)
+    lista01=[] #con esta almaceno los datos de la columna 1 del 
+    lista02=[] #aquí vamos a meter todas las letras que necesitamos
+    dict={} #con el diccionario almacenaremos tanto letras como las cantidades.
+    for columna in leercsv: # por cada columna dentro del doc
+        lista01.append(columna[0])  # ingrese los datos de la columna 1 a lista01
+    for values in lista01:  # por cada dato en la lista 1
+        sublista = values.split()[0]  # esta variable almacena la letra que necesitamos
+        lista02.append(sublista)  #  los ingresa a la lista
+    for letras in lista02:
+        dict.setdefault(letras, 0)
+        dict[letras] = dict[letras]+1
+   
+    return sorted(dict.items())
+#print(pregunta_02())
+ 
 
 
 def pregunta_03():
@@ -57,9 +86,37 @@ def pregunta_03():
     ]
 
     """
-    return
+  
+    #Lo primero es abrir el archivo
+    with open("data.csv", "r") as file:
+      datac= file.readlines()
+    
+    #Ahora para cada f que tenga \n en datac debo reemplazarla por un ""
+    #Luego hago split en cada \t en el datac
+
+    datac= [a.replace("\n","") for a in datac]  
+    datac=[a.split("\t") for a in datac]
+
+    #para cada a en la columna 0 y cada a en la columna 1 que encuentre en el datac
+    columnas= [[a[0],int(a[1])] for a in datac ]
+
+    #set convierte en diccionario y quita duplicado
+    id=sorted(set([a[0] for a in datac]))
+
+    contador=0 #usaré contador en dos partes para que este vuelva a cero en vez de acumular el valor de la columna1
+    tuplac=[] #creo una lista vacía
+
+    for b in id:
+      for a in columnas:
+        if a[0]== b:
+          contador+= a[1]
+        
+      tuplac.append((b,contador)) 
+      contador=0 
+    return tuplac  
 
 
+  
 def pregunta_04():
     """
     La columna 3 contiene una fecha en formato `YYYY-MM-DD`. Retorne la cantidad de
@@ -82,7 +139,19 @@ def pregunta_04():
     ]
 
     """
-    return
+        #como en los puntos anteriores, abro el archivo
+    with open("data.csv","r") as file:
+        datad= file.readlines() #leo los datos 
+        datad= [f.replace("\n","") for f in datad] #reemplazo para cada f en el datad el \n por ""
+        datad= [f.split("\t") for f in datad] #hago split para cada f en datad que contenga \t
+    
+    lista_fechas=[f[2].split("-") for f in datad ] #para cada f en la columna dos de datad hacer split y usar ""
+    lista_meses=[f[1] for f in lista_fechas]
+    meses=sorted(set([f for f in lista_meses]))
+    tuplad=[(x, lista_meses.count(x)) for x in meses]
+
+    return tuplad
+   
 
 
 def pregunta_05():
@@ -100,7 +169,35 @@ def pregunta_05():
     ]
 
     """
-    return
+#como en los puntos anteriores, abro el archivo
+    with open("data.csv","r") as file:
+        datae=file.readlines()
+
+ #Estos pasos son sacados de los otros puntos, entonces es fácil, repetitivo
+
+ #para cada f encontrado en datae, reemplace \n por "" (nada)   
+    datae=[f.replace("\n","")for f in datae]
+ #para cada f que encuentre en datae, haga un split en el tabulador que encuentre   
+    datae=[f.split("\t") for f in datae]    
+    
+    id_list=sorted(set([f[0] for f in datae]))
+    lista_datae=[(f[0],int(f[1])) for f in datae]
+ 
+  #creo dos listas vacías  
+    tuplae=[]
+    valores=[]
+    
+
+    for b in id_list:
+        for a in lista_datae:
+            if a[0]== b:
+                valores.append(a[1]) #si encuentra que a=b agrega uno en la lista
+
+        tuplae.append((b, max(valores),min(valores)))
+        valores.clear() #remueve todos los elementos de la lista
+
+    return tuplae
+    
 
 
 def pregunta_06():
@@ -125,7 +222,35 @@ def pregunta_06():
     ]
 
     """
-    return
+   
+    with open("data.csv","r") as file:
+        dataf=file.readlines()
+    dataf=[f.replace("\n","") for f in dataf]
+    dataf=[f.split("\t") for f in dataf]
+    dataf=[f[4].split(",") for f in dataf]
+    
+    #puedo reciclar pasos de los puntos anteriores hasta la línea 229 del código
+
+    #Hago una lista clave valor
+    Key_value_list= [(b[:3],int(b[4:]))for a in dataf for b in a]
+
+   #la lista va a retornar ordenada gracias a sorted y por medio de set retirará los elementos repetidos. 
+    keys_dict=sorted(set(elemento[0] for elemento in Key_value_list ))
+    
+    valores=[]
+    tuplaf=[]
+    
+    for key in keys_dict:
+        for elemento in Key_value_list:
+            if elemento[0]== key:
+                valores.append(elemento[1]) #lo que hace append es sumarme un elemento a la columna 1
+        tuplaf.append((key, min(valores),max(valores)))
+        valores.clear()
+
+    return tuplaf
+
+
+    
 
 
 def pregunta_07():
@@ -149,7 +274,33 @@ def pregunta_07():
     ]
 
     """
-    return
+    with open("data.csv","r") as file:
+        datag=file.readlines()
+    datag=[f.replace("\n","") for f in datag]
+    datag=[f.split("\t") for f in datag]
+    
+
+    #Debo crear una lista con elementos de la columna 1 y la columna 2
+    data_list=[(int(a[1]),a[0]) for a in datag]
+
+    #Debo extraer el conjunto de numeros unicos ordenados en la columna 2 de los datos y eliminar duplicados, para eso es set
+    numeros=sorted(set(a[0] for a in data_list))
+    
+    #Creo dos listas vacías
+    tuplag=[]
+    letters=[]
+    
+    #para cada numero extraigo la lista letras que aparecen en la lista de datag
+    for b in numeros:
+        for a in data_list:
+            if a[0]-b == 0:
+                letters.append(a[1])    
+
+        tuplag.append((b,letters))
+        letters=[]
+      
+    
+    return tuplag    
 
 
 def pregunta_08():
@@ -174,7 +325,32 @@ def pregunta_08():
     ]
 
     """
-    return
+    with open("data.csv","r") as file:
+        datai=file.readlines()
+    datai=[f.replace("\n","") for f in datai]
+    datai=[f.split("\t") for f in datai]
+    
+    #creo una lista que contenga elementos de la columna 2 y la columna 1 respectivamente
+    data_list=[(int(a[1]),a[0]) for a in datai]
+
+    #obtengo el conjunto de numeros sin repeticiones (para eso es set) y ordenados (sorted)
+    # en la columna #2 de mi data_list
+    numeros=sorted(set(a[0] for a in data_list))
+
+    tuplai=[]
+    letters=[]
+    
+    for b in numeros:
+        for a in data_list:
+            if a[0]-b == 0:
+                letters.append(a[1])    
+
+        tuplai.append((b,sorted(set(letters))))
+        letters=[]
+      
+    
+    return tuplai
+    
 
 
 def pregunta_09():
@@ -197,7 +373,27 @@ def pregunta_09():
     }
 
     """
-    return
+    with open("data.csv","r") as file:
+        datah=file.readlines()
+
+    datah=[f.replace("\n","") for f in datah]
+    datah=[f.split("\t") for f in datah]
+    datah=[f[4].split(",") for f in datah]
+    
+    #saco cada clave usando string, a su vez, me toca recorrer cada fila y sus elementos
+    key_list= [(b[:3])for a in datah for b in a]
+    
+    #mediante el uso de set, elimino repetidos en key_list
+    key_dict=sorted(set( elemento for elemento in key_list ))
+    
+    #Creo una tupla y cuento las veces que encuentro cada key
+    tuplah=[(a,key_list.count(a))for a in key_dict]
+
+    dict01=dict(tuplah)
+           
+    return dict01
+    
+  
 
 
 def pregunta_10():
@@ -218,7 +414,22 @@ def pregunta_10():
 
 
     """
-    return
+    with open("data.csv", "r") as file:
+        dataj=file.readlines()
+    dataj=[f.replace("\n","")for f in dataj]
+    dataj=[f.split("\t") for f in dataj]
+
+    #obtengo cada valor de la columna 01 y divido la columna 04 y 05 y saco la longitud de éstas
+    #usando len()
+    longitud_columna04=[len(f[3].split(","))for f in dataj]
+    longitud_columna05=[len(f[4].split(",")) for f in dataj]
+    columna01=[(f[0]) for f in dataj]
+    
+    #Uso zip para unir los datos contenidos en cada una de las filas
+    data= list(zip(columna01,longitud_columna04,longitud_columna05))
+    
+    return data
+    
 
 
 def pregunta_11():
@@ -239,7 +450,49 @@ def pregunta_11():
 
 
     """
-    return
+    with open("data.csv", "r") as file:
+        datak=file.readlines()
+    datak=[f.replace("\n","")for f in datak]
+    datak=[f.split("\t") for f in datak]
+    #divido las columnas 02 y 04 y saco los valores
+    columna04=[f[3].split(",")for f in datak]
+    columna01=[int(f[1]) for f in datak]
+    
+    #Creo una lista para unir la columna 04 con la columna 02
+    listak=list(zip(columna04,columna01))
+
+    #Creo una lista para asignarle a las letras el valor que corresponde en la columna 02
+    #para esto me valgo de un contador que hará que al pasar a cada letra el valor sea 0 de nuevo 
+    #y no se acumule, adicionalmente, uso append para agregar b al elemento de la columna 02
+    lista2=[]
+    contador=0
+    for elemento in listak:
+        for b in elemento[contador]:
+            lista2.append((b,elemento[1]))
+            contador+= 1
+        contador=0
+    
+    #Procedo a crear un diccionario
+    diccionario={}
+
+    for key,value in lista2:
+        if key in diccionario.keys():
+            diccionario[key]+=value
+        else:
+            diccionario[key] =value
+
+    #Ordeno el diccionario tomando como referente las letras de manera ascendente
+
+    keys_ordenada=sorted(diccionario)
+    diccionario_ordenado={}
+    for a in keys_ordenada:
+        diccionario_ordenado[a]=diccionario[a]
+
+    return diccionario_ordenado
+
+
+
+   
 
 
 def pregunta_12():
@@ -257,4 +510,29 @@ def pregunta_12():
     }
 
     """
-    return
+    with open("data.csv", "r") as file:
+        datal=file.readlines()
+    datal=[f.replace("\n","")for f in datal]
+    datal=[f.split("\t") for f in datal]
+
+    #como en los puntos anteriores, obtengo valores de Columna01 y columna05 y los divido gracias 
+    #a split, y los uno con un zip
+    columna05=[f[4].split(",")for f in datal]
+    columna01=[(f[0]) for f in datal]
+    dataletras=list(zip(columna01,columna05))
+
+    #ordeno los valores de columna01 con sorted
+    dictkey=sorted(set(columna01))
+
+        #creo un diccionario con llaves ordenadas
+    diccionario={}
+    for key in dictkey:  
+        diccionario[key]= 0
+
+    #sumo los valores en el diccionario
+    for a, b in dataletras:
+       for c in b:
+           diccionario[a]+= int(c[4:])
+         
+    return diccionario
+    
