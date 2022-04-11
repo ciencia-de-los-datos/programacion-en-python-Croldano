@@ -247,7 +247,7 @@ def pregunta_06():
         tuplaf.append((key, min(valores),max(valores)))
         valores.clear()
 
-    return tuplaf
+    #return tuplaf
 
 
     
@@ -325,7 +325,32 @@ def pregunta_08():
     ]
 
     """
-    return
+    with open("data.csv","r") as file:
+        datai=file.readlines()
+    datai=[f.replace("\n","") for f in datai]
+    datai=[f.split("\t") for f in datai]
+    
+    #creo una lista que contenga elementos de la columna 2 y la columna 1 respectivamente
+    data_list=[(int(a[1]),a[0]) for a in datai]
+
+    #obtengo el conjunto de numeros sin repeticiones (para eso es set) y ordenados (sorted)
+    # en la columna #2 de mi data_list
+    numeros=sorted(set(a[0] for a in data_list))
+
+    tuplai=[]
+    letters=[]
+    
+    for b in numeros:
+        for a in data_list:
+            if a[0]-b == 0:
+                letters.append(a[1])    
+
+        tuplai.append((b,sorted(set(letters))))
+        letters=[]
+      
+    
+    return tuplai
+    
 
 
 def pregunta_09():
@@ -348,7 +373,26 @@ def pregunta_09():
     }
 
     """
-    return
+    with open("data.csv","r") as file:
+        datah=file.readlines()
+
+    datah=[f.replace("\n","") for f in datah]
+    datah=[f.split("\t") for f in datah]
+    datah=[f[4].split(",") for f in datah]
+    
+    #saco cada clave usando string, a su vez, me toca recorrer cada fila y sus elementos
+    key_list= [(b[:3])for a in datah for b in a]
+    
+    #mediante el uso de set, elimino repetidos en key_list
+    key_dict=sorted(set( elem for elem in key_list ))
+    
+    #Creo una tupla y cuento las veces que encuentro cada key
+    tuplah=[(a,key_list.count(a))for a in key_dict]
+    dict=dict(tuplah)
+           
+    return dict
+    
+  
 
 
 def pregunta_10():
