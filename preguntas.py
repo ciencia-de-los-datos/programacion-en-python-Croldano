@@ -477,11 +477,11 @@ def pregunta_11():
     #Procedo a crear un diccionario
     diccionario={}
 
-    for keys,values in listak:
-        if keys in diccionario.keys():
-            diccionario[keys]+=values
+    for key,value in listak:
+        if key in diccionario.keys():
+            diccionario[key]+=value
         else:
-            diccionario[keys] =values
+            diccionario[key] =value
 
     #Ordeno el diccionario tomando como referente las letras de manera ascendente
 
