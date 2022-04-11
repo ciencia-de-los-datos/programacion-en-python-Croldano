@@ -247,7 +247,7 @@ def pregunta_06():
         tuplaf.append((key, min(valores),max(valores)))
         valores.clear()
 
-    #return tuplaf
+    return tuplaf
 
 
     
