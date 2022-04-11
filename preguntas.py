@@ -413,7 +413,22 @@ def pregunta_10():
 
 
     """
-    return
+    with open("data.csv", "r") as file:
+        dataj=file.readlines()
+    dataj=[f.replace("\n","")for f in dataj]
+    dataj=[f.split("\t") for f in dataj]
+
+    #obtengo cada valor de la columna 01 y divido la columna 04 y 05 y saco la longitud de éstas
+    #usando len()
+    longitud_columna04=[len(f[3].split(","))for f in dataj]
+    longitud_columna05=[len(f[4].split(",")) for f in dataj]
+    columna01=[(f[0]) for f in dataj]
+    
+    #Uso zip para unir los datos contenidos en cada una de las filas
+    data= list(zip(columna01,longitud_columna04,longitud_columna05))
+    
+    return data
+    
 
 
 def pregunta_11():
@@ -434,7 +449,48 @@ def pregunta_11():
 
 
     """
-    return
+    with open("data.csv", "r") as file:
+        datak=file.readlines()
+    datak=[f.replace("\n","")for f in datak]
+    datak=[f.split("\t") for f in datak]
+
+    #divido las columnas 02 y 04 y saco los valores
+    columna01=[int(f[1]) for f in datak]
+    columna04=[f[3].split(",")for f in datak]
+    
+    #Creo una lista para unir la columna 04 con la columna 02
+    lista=list(zip(columna04,columna01))
+
+    #Creo una lista para asignarle a las letras el valor que corresponde en la columna 02
+    #para esto me valgo de un contador que hará que al pasar a cada letra el valor sea 0 de nuevo 
+    #y no se acumule, adicionalmente, uso append para agregar b al elemento de la columna 02
+
+    lista=[]
+    contador=0
+    for elemento in lista:
+        for b in elemento[contador]:
+            lista.append((b,elemento[1]))
+            contador+= 1
+        contador=0
+    
+    #Procedo a crear un diccionario
+    diccionario={}
+
+    for key,value in lista:
+        if key in diccionario.keys():
+            diccionario[key]+=value
+        else:
+            diccionario[key] =value
+
+    #Ordeno el diccionario tomando como referente las letras de manera ascendente
+
+    keys_ordenada=sorted(diccionario)
+    diccionario_ordenado={}
+    for a in keys_ordenada:
+        diccionario_ordenado[a]=diccionario[a]
+
+    return diccionario_ordenado
+   
 
 
 def pregunta_12():
